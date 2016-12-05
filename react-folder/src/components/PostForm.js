@@ -16,10 +16,15 @@ class PostForm extends Component {
   }
 
   handleOnSubmit(event){
+    // this is a lot of logic here.  
+    
     event.preventDefault();
     let userBoardId = currentUserBoardId(this.props.user_boards, this.props.current_user)
     let values = Object.assign({}, this.state, {user_board_id: userBoardId})
+    // perhaps postStatus can take multiple arguments (eg. user_board_id) to avoid the Object.assign here
+    // also can call the CurrentUSerBoard Id in the action creator
     this.props.postStatus(values)
+    // the postStatus action creator can dispatch another action to board request.
     this.props.boardRequest(this.props.user_boards[0].board_id)
     this.setState({content: ""})
   }
